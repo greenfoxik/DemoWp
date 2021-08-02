@@ -1,15 +1,54 @@
 'use strict';
 
 const SpecReporter = require('jasmine-spec-reporter').SpecReporter;
+
+// const Allure = require('allure-commandline');
+
+// this.runSuite = function(){
+// 	switch(DOMAIN) {
+// 		case 's1': 
+// 			return [
+// 				'./tests/store_spec.js',
+// 			  ];
+// 			break;
+// 		case 's2':
+// 			return [
+//             './tests/store_spec.js',
+// 			  ]; 
+					
+// 		default:
+// 	}
+// },
 exports.config = {
 
-   directConnect: true,
+    directConnect: true,
+
+   // framework: 'jasmine',
+
+       seleniumAddress: 'http//localhost:4444/wd/hub',
+
+   //    allScriptsTimeout: 50100,
 
    framework: 'jasmine',
+	jasmineNodeOpts: {
+		showColors: true,
+		print: function() {},
+		defaultTimeoutInterval: 480000 //time for every IT = 8 min
+	},
+	allScriptsTimeout: 480000, 
+	getPageTimeout: 60000,
+	directConnect: true,
 
-      seleniumAddress: 'http//localhost:4444/wd/hub',
+      suites: {
 
-      specs: ['./tests/store_spec.js'],
+         specs: ['./tests/store_spec.js',
+                 './tests/store2_spec.js',
+                 './tests/store3_spec.js'
+            ],
+
+         },
+
+     
 
      onPrepare() {
          browser.ignoreSynchronization = true;
@@ -26,10 +65,19 @@ exports.config = {
          )
        
       },
+      
+      // allScriptsTimeout: 480000, 
+      // getPageTimeout: 60000,
+      // directConnect: true,
 
       capabilities: {
-         browserName:'chrome'
-         },
+         'directConnect': true,
+         'browserName': 'firefox',
+         // 'browserName': 'chrome',
+   //       chromeOptions: {
+   //           args: ["--incognito"]
+   //       }
+      },
 
 
 
